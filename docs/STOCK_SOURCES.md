@@ -1,11 +1,11 @@
-# Stock / Public-Safe Demo Sources
+# Stock Demo Sources
 
-The before/after reference sheet is synthetic project artwork, not a real person.
+The before/after reference sheet uses a real Pexels stock photo as the source image and AI-generated normalized outputs derived from that visible source.
 
-Additional documentation source files use Wikimedia Commons public-domain images:
-
-- Double portrait of young woman named Leah, front and profile, probably 1903-1908.
-- Full-length studio portrait of Elizabeth Herrick, probably 1903-1908.
+- Pexels photo 37741914: <https://www.pexels.com/photo/casual-fashion-portrait-of-a-young-man-37741914/>
+- Pexels License: <https://www.pexels.com/license/>
+- Downloaded source image from the Pexels image CDN.
+- Normalized front, side, and body outputs generated from that source photo for documentation.
 
 Machine-readable source metadata is stored in [assets/STOCK_SOURCES.json](assets/STOCK_SOURCES.json).
 

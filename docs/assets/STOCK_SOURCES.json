@@ -1,20 +1,18 @@
 {
-  "reference_sheet": {
-    "title": "Synthetic public-safe before/after reference sheet demo",
-    "source": "Generated project documentation artwork",
-    "license": "Project-owned documentation asset",
+  "source_photo": {
+    "title": "Pexels photo 37741914",
+    "source_page": "https://www.pexels.com/photo/casual-fashion-portrait-of-a-young-man-37741914/",
+    "download_url": "https://images.pexels.com/photos/37741914/pexels-photo-37741914.jpeg?cs=srgb&dl=pexels-eduardo199o9-178988127-37741914.jpg&fm=jpg",
+    "license_url": "https://www.pexels.com/license/",
+    "license": "Pexels License",
+    "local_file": "source-pexels-man.jpg",
     "project_watermark": "dev-willbird1936"
   },
-  "title": "File:Double image of portrait of young woman named Leah, front and profile, probably between 1903 and 1908 (PORTRAITS 2640).jpg",
-  "source_page": "https://commons.wikimedia.org/wiki/File:Double_image_of_portrait_of_young_woman_named_Leah,_front_and_profile,_probably_between_1903_and_1908_(PORTRAITS_2640).jpg",
-  "download_url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Double_image_of_portrait_of_young_woman_named_Leah%2C_front_and_profile%2C_probably_between_1903_and_1908_%28PORTRAITS_2640%29.jpg",
-  "license": "Public domain (Wikimedia Commons file page)",
-  "photographer": "Henry Burt Herrick",
-  "project_watermark": "dev-willbird1936",
-  "full_body": {
-    "title": "File:Full length studio portrait of HB Herrick's wife, Elizabeth Herrick, between 1903 and 1908 (PORTRAITS 2623).jpg",
-    "download_url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Full_length_studio_portrait_of_HB_Herrick%27s_wife%2C_Elizabeth_Herrick%2C_between_1903_and_1908_%28PORTRAITS_2623%29.jpg",
-    "license": "Public domain (Wikimedia Commons file page)",
+  "normalized_output": {
+    "title": "Normalized front, side, and body views generated from Pexels photo 37741914",
+    "local_file": "normalized-pexels-man.png",
+    "source_reference": "source-pexels-man.jpg",
+    "license": "Generated documentation asset derived from Pexels source photo",
     "project_watermark": "dev-willbird1936"
   }
 }

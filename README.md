@@ -23,7 +23,7 @@ Built by `dev-willbird1936`.
 
 ![Reference sheet demo](docs/assets/reference-sheet-demo.png)
 
-The reference sheet visual uses synthetic public-safe artwork so no real private person appears in the release. Public-domain stock source metadata for alternate documentation visuals is listed in [docs/assets/STOCK_SOURCES.json](docs/assets/STOCK_SOURCES.json).
+The reference sheet visual uses a Pexels stock photo of a real person and normalized generated outputs for the same person. Source metadata is listed in [docs/assets/STOCK_SOURCES.json](docs/assets/STOCK_SOURCES.json).
 
 ## Install
 

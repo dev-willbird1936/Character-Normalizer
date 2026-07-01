@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- Replaced the synthetic reference-sheet demo with a real Pexels stock human source photo.
+- Added normalized photoreal front, side, and body outputs generated from that same person.
+- Removed the older demo source files from documentation assets.
+
 ## 0.1.1
 
 - Replaced the before/after reference sheet with a synthetic public-safe visual using one coherent identity across source, front, side, and body views.
