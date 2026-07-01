@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.1
+
+- Replaced the before/after reference sheet with a synthetic public-safe visual using one coherent identity across source, front, side, and body views.
+- Reduced visible watermark noise while keeping project ownership marks in the visual and PNG metadata.
+
 ## 0.1.0
 
 - Added browser UI for front, modify, and side/body generation flows.

@@ -1,6 +1,8 @@
-# Stock / Public-Domain Demo Sources
+# Stock / Public-Safe Demo Sources
 
-Demo assets use Wikimedia Commons public-domain files:
+The before/after reference sheet is synthetic project artwork, not a real person.
+
+Additional documentation source files use Wikimedia Commons public-domain images:
 
 - Double portrait of young woman named Leah, front and profile, probably 1903-1908.
 - Full-length studio portrait of Elizabeth Herrick, probably 1903-1908.

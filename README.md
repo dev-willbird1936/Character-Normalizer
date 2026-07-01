@@ -23,7 +23,7 @@ Built by `dev-willbird1936`.
 
 ![Reference sheet demo](docs/assets/reference-sheet-demo.png)
 
-Demo images use public-domain Wikimedia Commons photographs. See [docs/assets/STOCK_SOURCES.json](docs/assets/STOCK_SOURCES.json).
+The reference sheet visual uses synthetic public-safe artwork so no real private person appears in the release. Public-domain stock source metadata for alternate documentation visuals is listed in [docs/assets/STOCK_SOURCES.json](docs/assets/STOCK_SOURCES.json).
 
 ## Install
 
