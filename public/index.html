@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="application-name" content="Character Normalizer by dev-willbird1936">
+  <meta name="author" content="dev-willbird1936">
+  <title>Character Normalizer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header class="titlebar">
+      <span class="title">Character Normalizer</span>
+      <button class="close-btn" id="closeBtn" aria-label="Close">&#215;</button>
+    </header>
+
+    <main>
+      <nav class="top-tabs">
+        <button class="tab active" data-mode="front">Front</button>
+        <button class="tab" data-mode="side-body">Side &amp; Body</button>
+      </nav>
+
+      <!-- Front panel -->
+      <section id="front-panel" class="mode-panel">
+        <nav class="sub-tabs">
+          <button class="subtab active" data-subtab="generate">Generate</button>
+          <button class="subtab" data-subtab="modify">Modify</button>
+        </nav>
+
+        <div id="generate-panel" class="subtab-panel">
+          <label for="prompt">Front Image Prompt:</label>
+          <textarea id="prompt" rows="8" placeholder="Describe your front-facing image..."></textarea>
+
+          <div class="row">
+            <label for="resolution">Resolution:</label>
+            <select id="resolution">
+              <option>1024 (1024 px)</option>
+              <option>2K (2048 px)</option>
+              <option selected>4K (4096 px)</option>
+              <option>8K (8192 px)</option>
+            </select>
+          </div>
+
+          <div class="row auto-save-row">
+            <label for="autoSave">Auto Save:</label>
+            <input id="autoSave" type="text" value="output/generated-images">
+            <button class="icon-btn" id="pickFolder" title="Pick folder" aria-label="Pick folder"><span class="icon icon-folder" aria-hidden="true"></span></button>
+          </div>
+
+          <button id="generateBtn" class="action-btn" disabled><span class="icon icon-spark" aria-hidden="true"></span>GENERATE IMAGE</button>
+          <div class="error" id="error"></div>
+
+          <div class="result-section">
+            <h3>Generate Result:</h3>
+            <div class="result-grid">
+              <div class="result-slot" data-output="front">
+                <div class="slot-art slot-art-front" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Front result" class="hidden">
+                <span class="slot-label">Front</span>
+              </div>
+              <div class="result-slot" data-output="side">
+                <div class="slot-art slot-art-side" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Side result" class="hidden">
+                <span class="slot-label">Side</span>
+              </div>
+              <div class="result-slot" data-output="body">
+                <div class="slot-art slot-art-body" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Body result" class="hidden">
+                <span class="slot-label">Body</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="apply-section">
+            <span>Apply Image:</span>
+            <label><input type="checkbox" id="applyFront" checked> Front</label>
+            <label><input type="checkbox" id="applySide" checked> Side</label>
+            <label><input type="checkbox" id="applyBody" checked> Body</label>
+          </div>
+          <button id="applyBtn" class="action-btn secondary" disabled><span class="icon icon-apply" aria-hidden="true"></span>APPLY IMAGES</button>
+        </div>
+
+        <div id="modify-panel" class="subtab-panel hidden">
+          <div class="photo-section">
+            <div class="photo-header">
+              <span>Photo Resource:</span>
+              <div class="photo-actions">
+                <button class="icon-btn" id="browsePhoto" title="Browse" aria-label="Browse"><span class="icon icon-folder" aria-hidden="true"></span></button>
+                <button class="icon-btn" id="openPhoto" title="Open" aria-label="Open"><span class="icon icon-open" aria-hidden="true"></span></button>
+                <button class="icon-btn" id="deletePhoto" title="Delete" aria-label="Delete"><span class="icon icon-trash" aria-hidden="true"></span></button>
+              </div>
+            </div>
+            <div class="photo-preview">
+              <img id="photoPreview" alt="Source photo" class="hidden">
+              <div class="photo-placeholder" id="photoPlaceholder">No photo selected</div>
+            </div>
+            <input type="file" id="photoInput" accept="image/*" class="hidden">
+          </div>
+
+          <div class="options">
+            <label><input type="checkbox" id="enhanceImage"> Enhance Image</label>
+            <div class="option-group">
+              <span>Hair &amp; Makeup:</span>
+              <div class="checkbox-row">
+                <label><input type="checkbox" id="removeHair"> Remove Hair</label>
+                <label><input type="checkbox" id="removeBeard"> Remove Beard</label>
+                <label><input type="checkbox" id="removeEyebrow"> Remove Eyebrow</label>
+                <label><input type="checkbox" id="removeEyelash"> Remove Eyelash</label>
+                <label><input type="checkbox" id="removeMakeup"> Remove Makeup</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <label for="resolutionModify">Resolution:</label>
+            <select id="resolutionModify">
+              <option>1024 (1024 px)</option>
+              <option>2K (2048 px)</option>
+              <option selected>4K (4096 px)</option>
+              <option>8K (8192 px)</option>
+            </select>
+          </div>
+
+          <div class="row auto-save-row">
+            <label for="autoSaveModify">Auto Save:</label>
+            <input id="autoSaveModify" type="text" value="output/generated-images">
+            <button class="icon-btn" id="pickFolderModify" title="Pick folder" aria-label="Pick folder"><span class="icon icon-folder" aria-hidden="true"></span></button>
+          </div>
+
+          <button id="generateBtnModify" class="action-btn" disabled><span class="icon icon-spark" aria-hidden="true"></span>GENERATE IMAGE</button>
+          <div class="error" id="errorModify"></div>
+
+          <div class="result-section">
+            <h3>Generate Result:</h3>
+            <div class="result-grid">
+              <div class="result-slot" data-output="front">
+                <div class="slot-art slot-art-front" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Front result" class="hidden">
+                <span class="slot-label">Front</span>
+              </div>
+              <div class="result-slot" data-output="side">
+                <div class="slot-art slot-art-side" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Side result" class="hidden">
+                <span class="slot-label">Side</span>
+              </div>
+              <div class="result-slot" data-output="body">
+                <div class="slot-art slot-art-body" aria-hidden="true"><span class="crosshair"></span></div>
+                <img alt="Body result" class="hidden">
+                <span class="slot-label">Body</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="apply-section">
+            <span>Apply Image:</span>
+            <label><input type="checkbox" id="applyFrontModify" checked> Front</label>
+            <label><input type="checkbox" id="applySideModify" checked> Side</label>
+            <label><input type="checkbox" id="applyBodyModify" checked> Body</label>
+          </div>
+          <button id="applyBtnModify" class="action-btn secondary" disabled><span class="icon icon-apply" aria-hidden="true"></span>APPLY IMAGES</button>
+        </div>
+      </section>
+
+      <!-- Side & Body panel -->
+      <section id="side-body-panel" class="mode-panel hidden">
+        <div class="photo-section">
+          <div class="photo-header">
+            <span>Photo Resource:</span>
+            <div class="photo-actions">
+              <button class="icon-btn" id="browsePhotoSide" title="Browse" aria-label="Browse"><span class="icon icon-folder" aria-hidden="true"></span></button>
+              <button class="icon-btn" id="openPhotoSide" title="Open" aria-label="Open"><span class="icon icon-open" aria-hidden="true"></span></button>
+              <button class="icon-btn" id="deletePhotoSide" title="Delete" aria-label="Delete"><span class="icon icon-trash" aria-hidden="true"></span></button>
+            </div>
+          </div>
+          <div class="photo-preview">
+            <img id="photoPreviewSide" alt="Source photo" class="hidden">
+            <div class="photo-placeholder" id="photoPlaceholderSide">No photo selected</div>
+          </div>
+          <input type="file" id="photoInputSide" accept="image/*" class="hidden">
+        </div>
+
+        <div class="outputs">
+          <label><input type="checkbox" id="outputSide"> Side</label>
+          <label><input type="checkbox" id="outputBody"> Body</label>
+        </div>
+
+        <fieldset id="bodyOptionsFieldset" disabled>
+          <div class="radio-row">
+            <span>Body Shape:</span>
+            <label><input type="radio" name="bodyShape" value="average" checked> Average</label>
+            <label><input type="radio" name="bodyShape" value="heavy"> Heavy</label>
+            <label><input type="radio" name="bodyShape" value="slim"> Slim</label>
+          </div>
+          <div class="radio-row">
+            <span>Gender:</span>
+            <label><input type="radio" name="gender" value="male" checked> Male</label>
+            <label><input type="radio" name="gender" value="female"> Female</label>
+          </div>
+          <div class="radio-row">
+            <span>Physique:</span>
+            <label><input type="radio" name="physique" value="normal" checked> Normal</label>
+            <label><input type="radio" name="physique" value="muscular"> Muscular</label>
+          </div>
+        </fieldset>
+
+        <div class="note">
+          <span class="info-icon">i</span>
+          Not recommended for pre-adults.
+        </div>
+
+        <div class="row auto-save-row">
+          <label for="autoSaveSide">Auto Save:</label>
+          <input id="autoSaveSide" type="text" value="output/generated-images">
+          <button class="icon-btn" id="pickFolderSide" title="Pick folder" aria-label="Pick folder"><span class="icon icon-folder" aria-hidden="true"></span></button>
+        </div>
+
+        <button id="generateBtnSide" class="action-btn" disabled><span class="icon icon-spark" aria-hidden="true"></span>GENERATE IMAGE</button>
+        <div class="error" id="errorSide"></div>
+
+        <div class="result-section">
+          <h3>Generate Result:</h3>
+          <div class="result-grid">
+            <div class="result-slot" data-output="front">
+              <div class="slot-art slot-art-front" aria-hidden="true"><span class="crosshair"></span></div>
+              <img alt="Front result" class="hidden">
+              <span class="slot-label">Front</span>
+            </div>
+            <div class="result-slot" data-output="side">
+              <div class="slot-art slot-art-side" aria-hidden="true"><span class="crosshair"></span></div>
+              <img alt="Side result" class="hidden">
+              <span class="slot-label">Side</span>
+            </div>
+            <div class="result-slot" data-output="body">
+              <div class="slot-art slot-art-body" aria-hidden="true"><span class="crosshair"></span></div>
+              <img alt="Body result" class="hidden">
+              <span class="slot-label">Body</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="apply-section">
+          <span>Apply Image:</span>
+          <label><input type="checkbox" id="applyFrontSide" checked> Front</label>
+          <label><input type="checkbox" id="applySideSide" checked> Side</label>
+          <label><input type="checkbox" id="applyBodySide" checked> Body</label>
+        </div>
+        <button id="applyBtnSide" class="action-btn secondary" disabled><span class="icon icon-apply" aria-hidden="true"></span>APPLY IMAGES</button>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
