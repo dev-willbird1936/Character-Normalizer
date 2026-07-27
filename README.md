@@ -1,45 +1,58 @@
 # Character Normalizer
 
+[![CI](https://github.com/dev-willbird1936/Character-Normalizer/actions/workflows/ci.yml/badge.svg)](https://github.com/dev-willbird1936/Character-Normalizer/actions/workflows/ci.yml)
+[![Latest release](https://img.shields.io/github/v/release/dev-willbird1936/Character-Normalizer)](https://github.com/dev-willbird1936/Character-Normalizer/releases/latest)
+[![License: MIT](https://img.shields.io/github/license/dev-willbird1936/Character-Normalizer)](LICENSE)
+
 ![Character Normalizer hero](docs/assets/hero.png)
 
-Local desktop and browser UI for generating normalized front, side, and body character reference images.
-
-Built by `dev-willbird1936`.
-
-## Features
-
-![Feature overview](docs/assets/feature-overview.png)
-
-- Desktop popup mode through Electron.
-- Browser mode through local Express server.
-- Front prompt generation.
-- Front-photo modification with cleanup toggles.
-- Side/body generation from source photos.
-- Streaming results: each generated asset appears as soon as it is ready.
-- Strong identity-preservation prompt rules for original features, marks, body shape, and proportions.
-- Provider adapter layer for Codex CLI, raw image CLI, and mock output.
+Local Electron and browser app that generates consistent front, side, and full-body character reference images. It streams each result as soon as it is ready and applies strong identity-preservation rules across views.
 
 ## Reference Sheet Flow
 
 ![Reference sheet demo](docs/assets/reference-sheet-demo.png)
 
-The reference sheet visual uses a Pexels stock photo of a real person and normalized generated outputs for the same person. Source metadata is listed in [docs/assets/STOCK_SOURCES.json](docs/assets/STOCK_SOURCES.json).
+Start with a source photo, then generate normalized front, true-side, and full-body references while preserving facial geometry, visible marks, clothing, build, and proportions.
 
-## Install
+The demo uses a Pexels stock photo. Source metadata is listed in [`docs/assets/STOCK_SOURCES.json`](docs/assets/STOCK_SOURCES.json).
+
+## Quick Start
+
+Requirements:
+
+- Node.js 20 or later
+- Codex CLI installed and authenticated for the default `codex-cli` provider
+
+On Windows, run:
+
+```bat
+start-desktop.bat
+```
+
+Or run it directly:
 
 ```bash
 npm install
-```
-
-## Desktop Popup
-
-```bash
 npm run desktop
 ```
 
-This builds the TypeScript server, starts it on a random local loopback port, and opens the app in a desktop window. The desktop folder picker returns an absolute output path.
+The Electron app starts a local server on a random loopback port and provides a native output-folder picker.
+
+## Features
+
+![Feature overview](docs/assets/feature-overview.png)
+
+- Electron desktop popup and local browser modes
+- Front prompt generation
+- Front-photo modification with cleanup controls
+- Side and full-body generation from source photos
+- Streaming results for each generated asset
+- Identity-preservation rules for face, marks, body shape, and proportions
+- Provider adapters for Codex CLI, a raw image CLI, and mock output
 
 ## Browser Mode
+
+Start the development server:
 
 ```bash
 npm run dev
@@ -53,15 +66,17 @@ For a non-watch server:
 npm start
 ```
 
+Windows users can run `start.bat` to install missing dependencies, find Codex CLI, start the server, and open the browser.
+
 ## Mock Mode
 
-Use mock mode for UI testing without image generation:
+Use mock mode to test the complete UI without making image-generation calls:
 
-```bash
-IMAGE_GENERATION_PROVIDER=mock npm run dev
+```bat
+start-mock.bat
 ```
 
-On Windows PowerShell:
+Or set the provider manually:
 
 ```powershell
 $env:IMAGE_GENERATION_PROVIDER = "mock"
@@ -70,28 +85,28 @@ npm run dev
 
 ## Provider Configuration
 
-Default provider is `codex-cli`. It runs Codex CLI once per requested output and asks `$imagegen` to save a final image path plus JSON asset metadata.
+The default provider is `codex-cli`. It runs Codex CLI once per requested output and asks `$imagegen` to save the final image and JSON asset metadata.
 
 | Variable | Purpose |
 | --- | --- |
-| `IMAGE_GENERATION_PROVIDER` | Provider id. Built-ins: `codex-cli`, `raw-image-cli`, `mock`. |
-| `CODEX_CLI_COMMAND` | Codex CLI binary path. Defaults to `codex` from `PATH`. |
+| `IMAGE_GENERATION_PROVIDER` | Provider ID: `codex-cli`, `raw-image-cli`, or `mock`. |
+| `CODEX_CLI_COMMAND` | Codex CLI path. Defaults to `codex` from `PATH`. |
 | `CODEX_PROVIDER_ISOLATED_HOME` | Optional isolated Codex home. Set `0` to disable isolation. |
 | `IMAGE_GEN_SCRIPT` | Optional script path for `raw-image-cli`. |
 | `IMAGE_GEN_PYTHON` | Python executable for `raw-image-cli`. |
 | `OPENAI_API_KEY` | Required only by `raw-image-cli`. |
 
-Secrets are redacted from provider logs, but real keys should stay in local environment variables and never be committed.
+Secrets are redacted from provider logs. Keep real keys in local environment variables and never commit them.
 
-## Prompt Safety
+## Identity Preservation
 
-For source-image modes, the base prompt now explicitly preserves:
+For source-image modes, the base prompt preserves:
 
 - original person and facial geometry
-- eye shape, nose, mouth, jawline, cheekbones, ears
-- skin tone, visible marks, asymmetry, age impression, expression
-- body shape, build, height-to-width proportions
-- shoulder width, waist/hip balance, neck length, limb proportions, posture cues
+- eye shape, nose, mouth, jawline, cheekbones, and ears
+- skin tone, visible marks, asymmetry, age impression, and expression
+- body shape, build, and height-to-width proportions
+- shoulder width, waist and hip balance, neck length, limb proportions, and posture cues
 
 The prompt blocks unrequested beautification, age shifting, stylization, slimming, bulking, or generic identity replacement.
 
@@ -102,27 +117,17 @@ npm run build
 npm test
 ```
 
-## Architecture
+Project layout:
 
-- `public/`: vanilla JS UI.
-- `desktop/`: Electron popup shell and native folder picker bridge.
-- `src/server.ts`: Express app, upload/image/apply/generate endpoints.
-- `src/generation/`: provider interface, registry, prompt builder, Codex CLI provider, raw image CLI provider, mock provider.
-- `tests/`: provider, prompt, and server endpoint coverage.
+- `public/`: browser UI
+- `desktop/`: Electron shell and native folder picker bridge
+- `src/server.ts`: Express app and generation endpoints
+- `src/generation/`: provider interface, registry, prompt builder, and adapters
+- `tests/`: provider, prompt, and server endpoint coverage
 
 ## Public Release Hygiene
 
-The repository ignores local/private artifacts:
-
-- `.secrets`
-- `.env*` except `.env.example`
-- `uploads/`
-- `output/`
-- `Documents/`
-- `dist/`
-- local generated auth/caches/logs
-
-Before publishing, run:
+The repository excludes local uploads, generated output, secrets, authentication caches, logs, and personal paths. Before publishing:
 
 ```bash
 rg -n -i "token|secret|api[_-]?key|absolute-private-path|private-character-name|uploads|output" -g "!node_modules" -g "!package-lock.json"
@@ -130,4 +135,4 @@ npm run build
 npm test
 ```
 
-Expected matches should be documentation, tests with fake values, or redaction code only.
+Expected matches must be documentation, tests with fake values, or redaction code.
